@@ -20,7 +20,7 @@ export default defineConfig(({command, mode }) => {
             rollupOptions: {
                 // make sure to externalize deps that shouldn't be bundled
                 // into your library
-                external: ['vue'],
+                external: ['vue', 'typescript', 'vue-tsc', '@types/vue', 'vite-plugin-libcss'],
                 output: {
                     // Provide global variables to use in the UMD build
                     // for externalized deps

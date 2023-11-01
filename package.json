@@ -26,6 +26,7 @@
     "glob": "^10.3.10"
   },
   "workspaces": [
-    "src/packages/@ecl-design/scatter-button"
+    "src/packages/@ecl-design/scatter-button",
+    "src/packages/@ecl-design/auto-typer"
   ]
 }
