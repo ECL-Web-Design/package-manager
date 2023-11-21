@@ -1,6 +1,6 @@
 {
   "name": "@ecl-design/scatter-button",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "description": "Design Scatter Button",
   "main": "dist/index.umd.js",
   "module": "dist/index.mjs",
@@ -10,7 +10,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE.md"
   ],
   "exports": {
     ".": {
@@ -21,7 +22,7 @@
     "./dist/*": "./dist/*"
   },
   "author": "ECL Web Design",
-  "license": "ISC",
+  "license": "GNU",
   "dependencies": {
     "vue": "^3.3.4"
   },

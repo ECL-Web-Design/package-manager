@@ -1,9 +1,9 @@
 <template>
     <component :is="componentType" class="scatter-button" @mouseleave="updateTransforms">
-        <div class="hover-animation-container">
+        <div class="node-container">
             <div v-for="i in cellCount" :key="i"
                  :style="{transform: transformMap[i - 1]}"
-                 class="hover-animation-item"></div>
+                 class="scatter-node"></div>
         </div>
         <slot>Button</slot>
     </component>
@@ -21,12 +21,14 @@ const props = withDefaults(defineProps<{
     columns?: number,
     rows?: number,
     distanceRange?: number,
+    distanceUnit?: 'px' | 'rem' | 'em' | 'vw' | 'vh' | 'cm' | 'mm' | 'in' | 'pc' | 'pt' | 'ex' | 'ch' | 'vmin' | 'vmax' | '%',
     scaleMin?: number,
     scaleMax?: number
 }>(), {
                                columns: 16,
                                rows: 4,
                                distanceRange: 150,
+                               distanceUnit: 'px',
                                scaleMin: 0.1,
                                scaleMax: 0.5
                            })
@@ -40,7 +42,7 @@ function updateTransforms() {
     transformMap.value = []
 
     for (let i = 0; i < cellCount.value; i++) {
-        transformMap.value.push(`translate(${randomInt(-props.distanceRange, props.distanceRange)}px, ${randomInt(
+        transformMap.value.push(`translate(${randomInt(-props.distanceRange, props.distanceRange)}${props.distanceUnit}, ${randomInt(
             -props.distanceRange,
             props.distanceRange
         )}px)
@@ -70,15 +72,16 @@ const rowsCSS = computed(() => props.rows)
 <style scoped lang="scss">
 
 .scatter-button {
-  --scatter-node-color: rgb(229,23,85);
-  --scatter-font-color: white;
-  --scatter-padding: 0.3rem 1rem;
-  --scatter-font-size: 1.5rem;
-  --scatter-button-background: rgb(44, 11, 75);
-  --scatter-node-transform-time: 0.4s;
+  --scatter-node-spread-color: white;
+  --scatter-node-grouped-color: white;
+  --scatter-node-spread-opacity: 0.5;
+  --scatter-node-grouped-opacity: 1;
+  --scatter-button-padding: 0.3rem 1rem;
+  --scatter-button-background: transparent;
+  --scatter-node-transition-time: 0.4s;
 }
 
-.hover-animation-container {
+.node-container {
     display: grid;
     position: absolute;
     inset: 0;
@@ -87,30 +90,31 @@ const rowsCSS = computed(() => props.rows)
     z-index: -1;
 }
 
-.hover-animation-item {
-    background-color: var(--scatter-node-color);
-    transition: transform var(--scatter-node-transform-time), border-radius calc(var(--scatter-node-transform-time) * 0.75), opacity calc(var(--scatter-node-transform-time) * 0.75);
+.scatter-node {
+    background-color: var(--scatter-node-spread-color);
+    transition: transform var(--scatter-node-transition-time), background-color var(--scatter-node-transition-time), border-radius calc(var(--scatter-node-transition-time) * 0.75), opacity calc(var(--scatter-node-transition-time) * 0.75);
     pointer-events: none;
-    opacity: 0.5;
+    opacity: var(--scatter-node-spread-opacity);
     border-radius: 50%;
 }
 
 .scatter-button {
     background-color: var(--scatter-button-background);
     transform: translate(0, 0);
-    color: var(--scatter-font-color);
-    font-size: var(--scatter-font-size);
-    padding: var(--scatter-padding);
+    color: inherit;
+    font-size: inherit;
+    padding: var(--scatter-button-padding);
     position: relative;
     outline: none;
-  border: none;
-  cursor: pointer;
+    border: none;
+    cursor: pointer;
 
     &:hover {
         .hover-animation-item {
             transform: translate(0, 0) scale(1) !important;
+            background-color: var(--scatter-node-grouped-color);
             border-radius: 0;
-            opacity: 1;
+            opacity: var(--scatter-node-grouped-opacity);
         }
     }
 }
