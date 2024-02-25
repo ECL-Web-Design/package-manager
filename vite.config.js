@@ -7,21 +7,23 @@ import libCss from 'vite-plugin-libcss'
 export default defineConfig(({command, mode }) => {
 
     return {
-        plugins: [vue(), dts({rollupTypes: true, outDir: `dist`}), libCss()],
+        plugins: [vue(), dts({rollupTypes: true, outDir: `dist`})],
         build: {
             emptyOutDir: true,
             outDir: `dist`,
             cssCodeSplit: true,
             lib: {
                 entry: 'index.ts',
+                formats: ['es', 'umd', 'iife'],
                 name: process.env.PACKAGE_NAME,
-                fileName: 'index'
+                fileName: 'index',
             },
             rollupOptions: {
                 // make sure to externalize deps that shouldn't be bundled
                 // into your library
-                external: ['vue', 'typescript', 'vue-tsc', '@types/vue', 'vite-plugin-libcss'],
+                external: ['vue', 'typescript', 'vue-tsc', '@types/vue'],
                 output: {
+                    extend: true,
                     // Provide global variables to use in the UMD build
                     // for externalized deps
                     globals: {

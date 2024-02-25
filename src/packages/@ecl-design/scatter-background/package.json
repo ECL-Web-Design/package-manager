@@ -1,35 +1,33 @@
 {
-  "name": "@ecl-design/auto-typer",
-  "version": "1.3.2",
-  "description": "Component that types out a list of words sequentially with animation.",
+  "name": "@ecl-design/scatter-background",
+  "version": "1.2.1",
+  "description": "Design Interactive Scatter Background",
   "main": "dist/index.umd.cjs",
-  "type": "module",
   "module": "dist/index.js",
+  "type": "module",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "set PACKAGE_NAME=auto-typer&& vite build --config ../../../../vite.config.js"
+    "build": "set PACKAGE_NAME=scatter-background&& vite build --config ../../../../vite.config.js"
   },
   "files": [
-    "dist",
-    "README.md"
+    "dist/*",
+    "README.md",
+    "LICENSE.md"
   ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.umd.cjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./style": "./dist/index.css"
   },
   "author": "ECL Web Design",
   "license": "GNU",
-  "sideEffects": [
-    "./dist/index.css"
-  ],
   "peerDependencies": {
     "vue": ">=3.2.0"
   },
   "devDependencies": {
-    "vite-plugin-libcss": "^1.1.1",
     "@types/vue": "^2.0.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.10",

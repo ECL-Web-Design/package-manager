@@ -1,17 +1,16 @@
 {
-  "name": "@ecl-design/scatter-button",
-  "version": "1.1.5",
-  "description": "Design Scatter Button",
+  "name": "@ecl-design/validated-input",
+  "version": "0.0.1",
+  "description": "Component that types out a list of words sequentially with animation.",
   "main": "dist/index.umd.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "set PACKAGE_NAME=scatter-button&& vite build --config ../../../../vite.config.js"
+    "build": "set PACKAGE_NAME=validated-input&& vite build --config ../../../../vite.config.js"
   },
   "files": [
     "dist",
-    "README.md",
-    "LICENSE.md"
+    "README.md"
   ],
   "exports": {
     ".": {
@@ -22,7 +21,7 @@
     "./dist/*": "./dist/*"
   },
   "author": "ECL Web Design",
-  "license": "GNU",
+  "license": "ISC",
   "dependencies": {
     "vue": "^3.3.4"
   },

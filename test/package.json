@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@ecl-design/auto-typer": "file:../src/packages/@ecl-design/auto-typer",
-    "@ecl-design/scatter-button": "file:../src/packages/@ecl-design/scatter-button",
+    "@ecl-design/scatter-background": "file:../src/packages/@ecl-design/scatter-background",
     "vue": "^3.3.4"
   },
   "devDependencies": {

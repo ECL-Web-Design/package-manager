@@ -1,0 +1,26 @@
+{
+  "name": "@ecl-server/ssl-make-cert",
+  "version": "1.0.0",
+  "description": "Utility tool that makes ssl certifications for all server blocks within nginx/conf.d/*.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild index.ts --platform=node --bundle --minify --format=esm --outfile=dist/index.js && esbuild bin.ts --platform=node --bundle --minify --format=cjs --outfile=dist/bin/bin.cjs"
+  },
+  "bin": {
+    "@ecl-server/ssl-make-cert": "dist/bin/bin.cjs"
+  },
+  "files": [
+    "dist",
+    "dist/bin/bin.js",
+    "README.md"
+  ],
+  "author": "ECL Web Design",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^4.4.10"
+  }
+}
