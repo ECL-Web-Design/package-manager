@@ -1,7 +1,7 @@
 ---
 name: Task Todo
 about: A task to do on the project.
-title: 'TODO: '
+title: ''
 labels: TODO
 assignees: elliottloxley
 
