@@ -1,7 +1,7 @@
 <template>
     <div class="auto-typer">
         <slot class="prefix" name="prefix">></slot>
-            <span class="word">{{ displayString }}</span>
+        <span class="word">{{ displayString }}</span>
         <span class="cursor">|</span>
     </div>
 </template>
@@ -13,31 +13,33 @@ import {computed, onMounted, onUnmounted, ref, watch} from "vue"
 import {sleep} from "@/helpers/helpers.ts"
 
 interface Props {
-    wordList : string[],
+    wordList: string[],
     stop?: boolean, // stops typing after current word has finished typing and untyping.
-    letterDelay? : number, // delay between each letter when typed
+    letterDelay?: number, // delay between each letter when typed
     untypeLetterDelay?: number, // delay between each letter when untyped
-    betweenDelay? : number, // delay before starting to untype the word after finishing typing
+    betweenDelay?: number, // delay before starting to untype the word after finishing typing
     afterUntypeDelay?: number, // delay after word has finished typing before new word starts
 }
 
-const props = withDefaults(defineProps<Props>(), {
-    letterDelay: 90,
-    untypeLetterDelay: 40,
-    betweenDelay : 500,
-    afterUntypeDelay : 150,
-})
+const {
+    wordList,
+    stop = false,
+    letterDelay = 90,
+    untypeLetterDelay = 40,
+    betweenDelay = 500,
+    afterUntypeDelay = 150
+} = defineProps<Props>()
 
 const emit = defineEmits<{
-    (event: 'typeStart') : void
-    (event: 'typeEnd') : void
-    (event: 'untypeStart') : void
-    (event: 'untypeEnd') : void
+    (event: 'typeStart'): void
+    (event: 'typeEnd'): void
+    (event: 'untypeStart'): void
+    (event: 'untypeEnd'): void
 }>()
 
 const currentWord = computed(() => {
-    if (props.wordList?.length > 0) {
-        return props.wordList[currentWordIndex.value]
+    if (wordList?.length > 0) {
+        return wordList[currentWordIndex.value]
     }
 
     return null
@@ -50,7 +52,7 @@ function nextWord() {
 
     currentWordIndex.value++
 
-    if (currentWordIndex.value >= props.wordList.length) {
+    if (currentWordIndex.value >= wordList.length) {
         currentWordIndex.value = 0
     }
 }
@@ -59,7 +61,7 @@ async function typeWord(wordRef: Ref<string>, wordToType: string) {
     for (const c of wordToType) {
         wordRef.value += c
 
-        await sleep(props.letterDelay)
+        await sleep(letterDelay)
     }
 }
 
@@ -84,13 +86,13 @@ async function typeLoop() {
         await typeWord(displayString, currentWord.value ?? '')
         emit('typeEnd')
 
-        await sleep(props.betweenDelay)
+        await sleep(betweenDelay)
 
         emit('untypeStart')
-        await untypeWord(displayString, props.untypeLetterDelay)
+        await untypeWord(displayString, untypeLetterDelay)
         emit('untypeEnd')
 
-        await sleep(props.afterUntypeDelay)
+        await sleep(afterUntypeDelay)
         nextWord()
 
         loopFinished.value = true
@@ -107,12 +109,12 @@ onUnmounted(() => {
     enableLoop.value = false
 })
 
-watch(() => props.wordList, () => {
-    currentWordIndex.value = 0;
+watch(() => wordList, () => {
+    currentWordIndex.value = 0
 })
 
-watch(() => props.stop, () => {
-    if(props.stop) {
+watch(() => stop, () => {
+    if (stop) {
         enableLoop.value = false
         return
     }
