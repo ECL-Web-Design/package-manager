@@ -1,11 +1,11 @@
 <template>
   <div class="test-list">
-      <scatter-background disable-reposition :columns="cols" :rows="rows">
-          Scatter
-      </scatter-background>
-      <button @click="cols += 1">inc col</button>
-      <button @click="rows += 1">inc row</button>
-      <auto-typer :word-list="['test', 'test 2', 'test 3']"></auto-typer>
+    <scatter-background disable-reposition enforce-circular-nodes :columns="cols" :rows="rows">
+      Scatter
+    </scatter-background>
+    <button @click="cols += 1">inc col</button>
+    <button @click="rows += 1">inc row</button>
+    <auto-typer :word-list="['test', 'test 2', 'test 3']"></auto-typer>
   </div>
 </template>
 
@@ -24,12 +24,12 @@ const rows = ref(1)
 <style scoped>
 
 .test-list {
-    display: grid;
-    gap: 3rem;
-    justify-content: center;
+  display: grid;
+  gap: 3rem;
+  justify-content: center;
 }
 
 .scatter-background {
-    --scatter-node-spread-color: red;
+  --scatter-node-spread-color: red;
 }
 </style>

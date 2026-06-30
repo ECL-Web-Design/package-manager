@@ -1,6 +1,6 @@
 {
   "name": "@ecl-design/scatter-background",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Design Interactive Scatter Background",
   "main": "dist/index.umd.cjs",
   "module": "dist/index.js",
@@ -25,12 +25,15 @@
   "author": "ECL Web Design",
   "license": "GNU",
   "peerDependencies": {
-    "vue": ">=3.2.0"
+    "vue": ">=3.5.0"
   },
   "devDependencies": {
     "@types/vue": "^2.0.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.10",
     "vue-tsc": "^1.8.15"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.3.0"
   }
 }
