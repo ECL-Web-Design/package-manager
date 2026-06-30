@@ -43,7 +43,6 @@ Importing and using the component:
 ```vue
 
 <script>
-  import "@ecl-design/scatter-background/style" //REQUIRED
   import ScatterBackground from "@ecl-design/scatter-background"
 
 </script>
@@ -68,8 +67,6 @@ Importing and using the component:
 
 </style>
 ```
-
-_Remember to import the component styling as well, the scatter effect will not work otherwise._
 
 ### [Codepen Demo](https://codepen.io/eclwebdesign/pen/poGxmrp)
 
@@ -138,7 +135,7 @@ The component comes with a number of css variables that can be overridden to cha
 
 Font size and color are inherited by default.
 
-CSS can also be overridden directly with the vue :deep() selector.
+Styles can also be overridden directly with the vue :deep() selector.
 
 ### CSS Variables
 

@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 
-import {computed, ref, useTemplateRef, watchEffect, WatchStopHandle} from "vue"
+import {computed, ref, useTemplateRef, watch, watchEffect, WatchStopHandle} from "vue"
 import {clamp, randomInt, randomRange} from "@/helpers/helpers.js"
 import {useElementSize} from "@vueuse/core"
 
@@ -45,7 +45,11 @@ const {width: containerWidth, height: containerHeight} = useElementSize(nodeCont
 
 const containerRatio = computed(() => {
     const ratio = containerWidth.value / containerHeight.value
-    return isFinite(ratio) && ratio >= 0 ? 1 : ratio
+    return isFinite(ratio) && !isNaN(ratio) && ratio >= 0 ? ratio : 1
+})
+
+watch(containerRatio, () => {
+    updateTransforms()
 })
 
 function onMouseLeave() {
@@ -66,11 +70,9 @@ function updateTransforms() {
     let scaleY = 1
 
     if (props.enforceCircularNodes) {
-        if (containerRatio.value > 1) {
-            scaleX = 1 / containerRatio.value
-        } else {
-            scaleY = containerRatio.value
-        }
+        const nodeRatio = containerRatio.value * props.rows / props.columns
+        scaleX = 1 / Math.sqrt(nodeRatio)
+        scaleY = Math.sqrt(nodeRatio)
     }
 
     for (let y = 0; y < props.rows; y++) {

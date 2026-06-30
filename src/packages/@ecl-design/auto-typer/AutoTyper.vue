@@ -1,9 +1,13 @@
 <template>
-    <div class="auto-typer">
-        <slot class="prefix" name="prefix">></slot>
-        <span class="word">{{ displayString }}</span>
-        <span class="cursor">|</span>
-    </div>
+  <div class="auto-typer">
+        <span class="prefix">
+            <slot name="prefix">></slot>
+        </span>
+    <span class="typed-content">
+            <span class="word">{{ displayString }}</span>
+            <span class="cursor" aria-hidden="true"></span>
+        </span>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -19,6 +23,8 @@ interface Props {
     untypeLetterDelay?: number, // delay between each letter when untyped
     betweenDelay?: number, // delay before starting to untype the word after finishing typing
     afterUntypeDelay?: number, // delay after word has finished typing before new word starts
+    prefixSpace?: number, // pixel gap between the prefix and typed content
+    cursorWidth?: number, // pixel width of the cursor
 }
 
 const {
@@ -27,7 +33,9 @@ const {
     letterDelay = 90,
     untypeLetterDelay = 40,
     betweenDelay = 500,
-    afterUntypeDelay = 150
+    afterUntypeDelay = 150,
+    prefixSpace = 5,
+    cursorWidth = 2
 } = defineProps<Props>()
 
 const emit = defineEmits<{
@@ -129,14 +137,33 @@ watch(() => stop, () => {
 
 .auto-typer {
   display: flex;
+  gap: v-bind('prefixSpace + "px"');
+  align-items: baseline;
 }
 
-.prefix {
-  margin-right: 0.3rem;
+.typed-content {
+  display: inline-flex;
+  align-items: baseline;
 }
 
 .cursor {
-  font-weight: 400;
+  display: inline-block;
+  width: v-bind('cursorWidth + "px"');
+  height: 1em;
+  margin-left: 1px;
+  background: currentColor;
+  animation: auto-typer-cursor-blink 1s steps(1, end) infinite;
+  transform: translateY(0.1em);
+}
+
+@keyframes auto-typer-cursor-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+
+  50%, 100% {
+    opacity: 0;
+  }
 }
 
 </style>

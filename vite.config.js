@@ -7,7 +7,7 @@ import libCss from 'vite-plugin-libcss'
 export default defineConfig(({command, mode }) => {
 
     return {
-        plugins: [vue(), dts({rollupTypes: true, outDir: `dist`})],
+        plugins: [vue(), dts({rollupTypes: true, outDir: `dist`}), libCss()],
         build: {
             emptyOutDir: true,
             outDir: `dist`,

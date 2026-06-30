@@ -5,7 +5,7 @@
     </scatter-background>
     <button @click="cols += 1">inc col</button>
     <button @click="rows += 1">inc row</button>
-    <auto-typer :word-list="['test', 'test 2', 'test 3']"></auto-typer>
+    <auto-typer :prefix-space="5" :word-list="['test', 'test 2', 'test 3']"></auto-typer>
   </div>
 </template>
 
