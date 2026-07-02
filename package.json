@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build-packages": "npm run build --workspaces",
-    "publish-all": "npm publish --workspaces --access=public"
+    "publish-all": "npm publish --workspaces --access=public",
+    "create-vue-design-package": "node scripts/create-vue-design-package.js"
   },
   "devDependencies": {
     "@inquirer/prompts": "^7.9.0",
@@ -36,6 +37,7 @@
     "src/packages/@ecl-server/create-site",
     "src/packages/@ecl-server/ssl-make-cert",
     "src/packages/@ecl-form/validated-input",
-    "src/packages/generic/inquirer-password-confirm"
+    "src/packages/generic/inquirer-password-confirm",
+    "src/packages/@ecl-design/hold-button"
   ]
 }
